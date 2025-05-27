@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Personas</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Personas</h1>
+        <a href="/agregar" class="btn btn-primary">Agregar Persona</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Correo Electrónico</th>
+                    <th>Calificación 1</th>
+                    <th>Calificación 2</th>
+                    <th>Calificación 3</th>
+                    <th>Promedio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for persona in personas %}
+                <tr>
+                    <td>{{ persona.id }}</td>
+                    <td>{{ persona.nombre }}</td>
+                    <td>{{ persona.edad }}</td>
+                    <td>{{ persona.correo_electronico }}</td>
+                    <td>{{ persona.calificacion_1 }}</td>
+                    <td>{{ persona.calificacion_2 }}</td>
+                    <td>{{ persona.calificacion_3 }}</td>
+                    <td>{{ (persona.calificacion_1 + persona.calificacion_2 + persona.calificacion_3) / 3 | round(2) }}</td>
+                    <td>
+                        <a href="/actualizar/{{ persona.id }}" class="btn btn-edit">Editar</a>
+                        <a href="/eliminar/{{ persona.id }}" class="btn btn-delete" onclick="return confirm('¿Estás seguro de eliminar esta persona?')">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
